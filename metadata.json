@@ -1,0 +1,8 @@
+{
+  "name": "DiverSafe",
+  "description": "Transformar la gestión de la seguridad, salud y eficiencia operativa en las faenas de buceo profesional en la industria salmonera chilena.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "prompt": ""
+}

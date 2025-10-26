@@ -1,0 +1,171 @@
+@echo off
+chcp 65001 >nul
+echo.
+echo 🔧 Reparando configuración de DiverSafe para GitHub Pages...
+echo.
+
+REM 1. Crear directorio para GitHub Actions
+echo 📁 Creando estructura de directorios...
+if not exist ".github\workflows" mkdir .github\workflows
+
+REM 2. Crear workflow de GitHub Actions
+echo 📝 Creando workflow de despliegue...
+(
+echo name: Deploy to GitHub Pages
+echo.
+echo on:
+echo   push:
+echo     branches:
+echo       - main
+echo   workflow_dispatch:
+echo.
+echo permissions:
+echo   contents: read
+echo   pages: write
+echo   id-token: write
+echo.
+echo concurrency:
+echo   group: "pages"
+echo   cancel-in-progress: false
+echo.
+echo jobs:
+echo   build:
+echo     runs-on: ubuntu-latest
+echo     steps:
+echo       - name: Checkout
+echo         uses: actions/checkout@v4
+echo.      
+echo       - name: Setup Node
+echo         uses: actions/setup-node@v4
+echo         with:
+echo           node-version: '20'
+echo           cache: 'npm'
+echo.      
+echo       - name: Install dependencies
+echo         run: npm ci
+echo.      
+echo       - name: Build
+echo         run: npm run build
+echo         env:
+echo           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+echo.      
+echo       - name: Setup Pages
+echo         uses: actions/configure-pages@v4
+echo.      
+echo       - name: Upload artifact
+echo         uses: actions/upload-pages-artifact@v3
+echo         with:
+echo           path: './dist'
+echo.      
+echo       - name: Deploy to GitHub Pages
+echo         id: deployment
+echo         uses: actions/deploy-pages@v4
+) > .github\workflows\deploy.yml
+
+REM 3. Actualizar vite.config.ts
+echo ⚙️  Actualizando vite.config.ts...
+(
+echo import path from 'path';
+echo import { defineConfig, loadEnv } from 'vite';
+echo import react from '@vitejs/plugin-react';
+echo.
+echo export default defineConfig^(^({ mode }^) =^> {
+echo     const env = loadEnv^(mode, '.', ''^^);
+echo     return {
+echo       base: '/Buceo-Seguro/',
+echo       server: {
+echo         port: 3000,
+echo         host: '0.0.0.0',
+echo       },
+echo       plugins: [react^(^)],
+echo       define: {
+echo         'process.env.API_KEY': JSON.stringify^(env.GEMINI_API_KEY^^),
+echo         'process.env.GEMINI_API_KEY': JSON.stringify^(env.GEMINI_API_KEY^^)
+echo       },
+echo       resolve: {
+echo         alias: {
+echo           '@': path.resolve^(__dirname, '.'^^),
+echo         }
+echo       },
+echo       build: {
+echo         outDir: 'dist',
+echo         assetsDir: 'assets',
+echo         emptyOutDir: true,
+echo       }
+echo     };
+echo }^^);
+) > vite.config.ts
+
+REM 4. Actualizar package.json
+echo 📦 Actualizando package.json...
+(
+echo {
+echo   "name": "diversafe",
+echo   "private": true,
+echo   "version": "0.0.0",
+echo   "type": "module",
+echo   "scripts": {
+echo     "dev": "vite",
+echo     "build": "vite build",
+echo     "preview": "vite preview",
+echo     "deploy": "npm run build && gh-pages -d dist"
+echo   },
+echo   "dependencies": {
+echo     "react": "^19.1.0",
+echo     "react-dom": "^19.1.0",
+echo     "@google/genai": "0.14.0"
+echo   },
+echo   "devDependencies": {
+echo     "@types/node": "^22.14.0",
+echo     "@vitejs/plugin-react": "^5.0.0",
+echo     "gh-pages": "^6.1.1",
+echo     "typescript": "~5.8.2",
+echo     "vite": "^6.2.0"
+echo   }
+echo }
+) > package.json
+
+REM 5. Crear .env.local de ejemplo
+echo 🔑 Creando .env.local de ejemplo...
+(
+echo # Copia este archivo a .env.local y agrega tu API key de Gemini
+echo GEMINI_API_KEY=tu_api_key_aqui
+) > .env.local.example
+
+REM 6. Actualizar .gitignore
+echo 📝 Actualizando .gitignore...
+findstr /C:".env.local" .gitignore >nul 2>&1
+if errorlevel 1 (
+    echo .env.local >> .gitignore
+)
+
+echo.
+echo ✅ ¡Configuración completada!
+echo.
+echo 📋 PRÓXIMOS PASOS:
+echo.
+echo 1️⃣  Instala las dependencias:
+echo    npm install
+echo.
+echo 2️⃣  Configura tu API key de Gemini:
+echo    - Copia .env.local.example a .env.local
+echo    - Edita .env.local y agrega tu API key
+echo.
+echo 3️⃣  Prueba localmente:
+echo    npm run dev
+echo.
+echo 4️⃣  Configura GitHub Pages:
+echo    - Ve a Settings → Pages → Source: GitHub Actions
+echo    - Ve a Settings → Secrets → New secret
+echo    - Nombre: GEMINI_API_KEY
+echo    - Valor: Tu API key de Gemini
+echo.
+echo 5️⃣  Despliega a GitHub:
+echo    git add .
+echo    git commit -m "Fix: Configurar para GitHub Pages"
+echo    git push origin main
+echo.
+echo 🚀 Tu app estará disponible en:
+echo    https://rodtechldata.github.io/Buceo-Seguro/
+echo.
+pause

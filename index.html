@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://generativelanguage.googleapis.com;">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aplicación Buceo Seguro - Desarrollado por DataFlowIA" />
     <title>Buceo Seguro | DataFlowIA</title>
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
     <!-- Estilos -->
     <style>
       :root {
@@ -57,16 +56,13 @@
       }
     </style>
   </head>
-
   <body>
     <div id="root">Cargando aplicación Buceo Seguro...</div>
-
     <footer>
       © 2025 <a href="https://www.dataflowia.com" target="_blank">www.dataflowia.com</a> |
       <a href="mailto:contacto@dataflowia.com">contacto@dataflowia.com</a> |
       Todos los derechos reservados.
     </footer>
-
     <!-- Script dinámico -->
     <script type="module">
       const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";

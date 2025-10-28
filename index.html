@@ -3,85 +3,80 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buceo Seguro</title>
+    <meta name="description" content="Aplicación Buceo Seguro - Desarrollado por DataFlowIA" />
+    <title>Buceo Seguro | DataFlowIA</title>
 
-    <!-- SEO -->
-    <meta name="description" content="Buceo Seguro — Aplicación de seguridad y monitoreo para buceadores desarrollada por DataFlowIA." />
-    <meta name="author" content="RodTechlData" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/Buceo-Seguro/assets/favicon.ico" />
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: { sans: ['Poppins', 'sans-serif'] },
-            colors: {
-              'brand-primary': '#0D1117',
-              'brand-secondary': '#161B22',
-              'brand-accent': '#38BDF8',
-              'brand-light': '#E6EDF3',
-            },
-            keyframes: {
-              fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              },
-            },
-            animation: {
-              'fade-in': 'fadeIn 1s ease-in-out',
-              float: 'float 3s ease-in-out infinite',
-            },
-          },
-        },
-      };
-    </script>
-
+    <!-- Estilos globales -->
     <style>
+      :root {
+        --deep-blue: #001f2d;
+        --cyan: #00e0ff;
+        --white: #e8f9ff;
+      }
+
       body {
         margin: 0;
-        overflow-x: hidden;
+        font-family: "Poppins", "Segoe UI", sans-serif;
+        background: var(--deep-blue);
+        color: var(--white);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
-      .wave {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 200%;
-        height: 100px;
-        background: rgba(56, 189, 248, 0.2);
-        border-radius: 100%;
-        animation: waveMove 10s linear infinite;
+
+      #root {
+        flex: 1;
+        padding: 2rem;
+        animation: fadeIn 1.2s ease-in-out;
       }
-      .wave:nth-child(2) {
-        background: rgba(56, 189, 248, 0.15);
-        animation-delay: -5s;
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-      @keyframes waveMove {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
+
+      footer {
+        background: rgba(0, 224, 255, 0.08);
+        color: var(--white);
+        padding: 1rem 0;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(0, 224, 255, 0.2);
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        animation: fadeInFooter 1.8s ease-in-out;
+      }
+
+      footer a {
+        color: var(--cyan);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @keyframes fadeInFooter {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
       }
     </style>
     <script type="module" crossorigin src="/Buceo-Seguro/assets/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/Buceo-Seguro/assets/style.css">
   </head>
 
-  <body class="bg-brand-primary text-brand-light font-sans">
-    <div id="root" class="animate-fade-in"></div>
+  <body>
+    <div id="root">Cargando aplicación Buceo Seguro...</div>
 
-    <div class="wave"></div>
-    <div class="wave"></div>
+    <footer>
+      © 2025 <a href="https://www.dataflowia.com" target="_blank">www.dataflowia.com</a> |
+      <a href="mailto:contacto@dataflowia.com">contacto@dataflowia.com</a> |
+      Todos los derechos reservados.
+    </footer>
 
-    <!-- Script de producción compilado -->
+    <!-- 🚀 Script inteligente -->
   </body>
 </html>

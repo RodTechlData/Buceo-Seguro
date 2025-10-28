@@ -5,100 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buceo Seguro</title>
 
-    <!-- ✅ Favicon (ahora con ruta correcta para GitHub Pages) -->
-    <link rel="icon" href="/Buceo-Seguro/favicon.ico" type="image/x-icon" />
-
     <!-- SEO -->
-    <meta
-      name="description"
-      content="Buceo Seguro: aplicación de seguridad para buceo desarrollada con DataFlowIA."
-    />
+    <meta name="description" content="Buceo Seguro — Aplicación de seguridad y monitoreo para buceadores desarrollada por DataFlowIA." />
     <meta name="author" content="RodTechlData" />
-    <meta name="theme-color" content="#0D1117" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['Poppins', 'sans-serif'],
-            },
+            fontFamily: { sans: ['Poppins', 'sans-serif'] },
             colors: {
               'brand-primary': '#0D1117',
               'brand-secondary': '#161B22',
-              'brand-tertiary': '#21262D',
-              'brand-accent': '#8B949E',
+              'brand-accent': '#38BDF8',
               'brand-light': '#E6EDF3',
-              'brand-interactive': '#38BDF8',
-              'brand-interactive-hover': '#7DD3FC',
-              'status-safe': '#22c55e',
-              'status-warning': '#facc15',
-              'status-danger': '#ef4444',
-            },
-            boxShadow: {
-              'glow-interactive': '0 0 15px 0 rgba(56, 189, 248, 0.3)',
-              'glow-danger': '0 0 15px 0 rgba(239, 68, 68, 0.4)',
             },
             keyframes: {
-              fadeIn: {
-                '0%': { opacity: 0, transform: 'translateY(10px)' },
-                '100%': { opacity: 1, transform: 'translateY(0)' },
+              fadeIn: { '0%': { opacity: 0 }, '100%': { opacity: 1 } },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
               },
             },
             animation: {
-              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'fade-in': 'fadeIn 1s ease-in-out',
+              float: 'float 3s ease-in-out infinite',
             },
           },
         },
       };
     </script>
 
-    <!-- Import Map para React + Google GenAI -->
-
-
-    <!-- Estilos del scroll -->
     <style>
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+      body {
+        margin: 0;
+        overflow-x: hidden;
       }
-      ::-webkit-scrollbar-track {
-        background: #161B22;
+      .wave {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 200%;
+        height: 100px;
+        background: rgba(56, 189, 248, 0.2);
+        border-radius: 100%;
+        animation: waveMove 10s linear infinite;
       }
-      ::-webkit-scrollbar-thumb {
-        background: #374151;
-        border-radius: 4px;
+      .wave:nth-child(2) {
+        background: rgba(56, 189, 248, 0.15);
+        animation-delay: -5s;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #4B5563;
-      }
-    </style>
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://esm.sh/react@19.1.0",
-          "react-dom": "https://esm.sh/react-dom@19.1.0",
-          "@google/genai": "https://esm.sh/@google/genai@0.14.0"
+      @keyframes waveMove {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
         }
       }
-    </script>
+    </style>
     <script type="module" crossorigin src="/Buceo-Seguro/assets/index.js"></script>
     <link rel="stylesheet" crossorigin href="/Buceo-Seguro/assets/style.css">
   </head>
 
- <body class="bg-brand-primary font-sans text-brand-light">
+  <body class="bg-brand-primary text-brand-light font-sans">
     <div id="root" class="animate-fade-in"></div>
 
-    <!-- ✅ Ruta RELATIVA para compilar local y en GitHub Pages -->
+    <div class="wave"></div>
+    <div class="wave"></div>
+
+    <!-- Script de producción compilado -->
   </body>
 </html>

@@ -24,6 +24,9 @@ export default defineConfig(({ mode }) => {
         outDir: 'dist',
         assetsDir: 'assets',
         emptyOutDir: true,
+        sourcemap: false,
+        minify: 'esbuild',
+        target: 'es2015',
       }
     };
 });

@@ -3,25 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DiverSafe</title>
+    <title>Buceo Seguro</title>
+
+    <!-- ✅ Favicon (ahora con ruta correcta para GitHub Pages) -->
+    <link rel="icon" href="/Buceo-Seguro/favicon.ico" type="image/x-icon" />
 
     <!-- SEO -->
-    <meta name="description" content="DiverSafe: aplicación de seguridad para buceo desarrollada con DataFlowIA." />
+    <meta
+      name="description"
+      content="Buceo Seguro: aplicación de seguridad para buceo desarrollada con DataFlowIA."
+    />
     <meta name="author" content="RodTechlData" />
-
-    <!-- Política de Seguridad (CSP) -->
-    <meta http-equiv="Content-Security-Policy" 
-      content="
-        default-src 'self';
-        script-src 'self' https://cdn.tailwindcss.com https://esm.sh;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
-        img-src 'self' data:;
-        connect-src 'self' https:;
-        object-src 'none';
-        base-uri 'self';
-        form-action 'self';
-      ">
+    <meta name="theme-color" content="#0D1117" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -70,19 +63,8 @@
       };
     </script>
 
-    <!-- Import map -->
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://esm.sh/react@^19.1.0",
-          "react-dom": "https://esm.sh/react-dom@^19.1.0",
-          "@google/genai": "https://esm.sh/@google/genai@0.14.0"
-        }
-      }
-    </script>
+    <!-- Import Map para React + Google GenAI -->
 
-    <!-- Favicon vacío para eliminar el error 404 -->
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
     <!-- Estilos del scroll -->
     <style>
@@ -101,9 +83,21 @@
         background: #4B5563;
       }
     </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.1.0",
+          "react-dom": "https://esm.sh/react-dom@19.1.0",
+          "@google/genai": "https://esm.sh/@google/genai@0.14.0"
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="/Buceo-Seguro/assets/index.js"></script>
   </head>
 
-  <body class="bg-brand-primary font-sans">
+ <body class="bg-brand-primary font-sans text-brand-light">
     <div id="root" class="animate-fade-in"></div>
+
+    <!-- ✅ Ruta RELATIVA para compilar local y en GitHub Pages -->
   </body>
 </html>
